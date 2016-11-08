@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "sourceMap":  true,
+        "module":"system"
+        //"files": ["Snake.ts", "Engine.ts"]
+    }
+}
