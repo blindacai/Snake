@@ -1,22 +1,26 @@
 /// <reference path='Snake.ts'/>
 /// <reference path='View.ts'/>
+/// <reference path='UserEvent.ts'/>
 
 class Engine{
     snake: Snake;
     view: View;
+    event: UserEvent;
 
     constructor(){
         this.snake = new Snake(100, 100);
         this.view = new View();
-    }
-
-    get(): any{
-        return this.snake;
+        this.event = new UserEvent();
     }
 
     main(){
-        document.getElementById("snake_p").innerHTML = engine.get().print();
-        this.view.draw(this.snake.getX(), this.snake.getY());
+        document.getElementById("snake_p").innerHTML = this.snake.print();
+        this.view.drawSnake(this.snake);
+        this.event.eventListener();
+    }
+
+    start(){
+        //setInterval(next, 150);
     }
 }
 
