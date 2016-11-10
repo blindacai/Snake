@@ -1,6 +1,6 @@
 class Snake{
-    pos_x: number;
-    pos_y: number;
+    private pos_x: number;
+    private pos_y: number;
 
     constructor(pos_x: number, pos_y: number){
         this.pos_x = pos_x;
