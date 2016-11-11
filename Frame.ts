@@ -8,8 +8,18 @@ class Frame{
         this.oldsnake = snake;
     }
 
-    nextFrame(){
-        this.newsnake = new Snake(this.oldsnake.getX() + 10, this.oldsnake.getY());
+    getoldSnake(){
+        return this.oldsnake;
+    }
+
+    nextFrame(snake: Snake){
+        if(snake){
+            this.newsnake = snake;
+        }
+        else{
+            this.newsnake = new Snake(this.oldsnake.getX() + 10, this.oldsnake.getY());
+        }
+
         this.view.clearSnake(this.oldsnake);
         this.oldsnake = this.newsnake;
         this.view.drawSnake(this.newsnake);
