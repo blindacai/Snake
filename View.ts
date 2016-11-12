@@ -25,7 +25,7 @@ class View{
         this.drawPoint(head);
     }
 
-    clearSnake(tail: Point): void{
+    clearTail(tail: Point): void{
         this.ctx.fillStyle = "white";
         this.ctx.fillRect(tail.getX() - 5, tail.getY() - 5, 10, 10);
     }

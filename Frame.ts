@@ -1,15 +1,11 @@
 class Frame{
     view: View;
-    oldhead: Point;
-    newhead: Point;
     newSnake: Snake;
     user_event: UserEvent;
 
     constructor(view: View, snake:Snake, user_event: UserEvent){
         this.view = view;
         this.newSnake = snake;
-
-        this.oldhead = this.newSnake.getHead();
         this.user_event = user_event;
     }
 
@@ -31,7 +27,7 @@ class Frame{
         }
         else return;
 
-        this.view.clearSnake(this.newSnake.removeTail());
+        this.view.clearTail(this.newSnake.removeTail());
         this.view.drawHead(this.newSnake.getHead());
     }
 }
