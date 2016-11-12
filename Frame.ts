@@ -11,6 +11,8 @@ class Frame{
 
     nextFrame(){
         let dir = this.user_event.getNewDirection();
+
+        // prevent snake from moving in complete opposite direction
         (dir + this.snake.getDirection() == 0)? (dir = this.snake.getDirection()) : this.snake.setDirection(dir);
 
         this.snake.getBody().unshift(this.snake.getHead());

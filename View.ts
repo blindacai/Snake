@@ -7,8 +7,8 @@ class View{
         this.ctx = this.canvas.getContext("2d");
     }
 
-    private drawPoint(point: Point): void{
-        this.ctx.fillStyle = "#4b4312";
+    private drawPoint(point: Point, color?: string): void{
+        this.ctx.fillStyle = color || "#4b431";
         this.ctx.beginPath();
         this.ctx.arc(point.getX(), point.getY(), 5, 0, 2*Math.PI, false);
         this.ctx.fill();
@@ -28,5 +28,9 @@ class View{
     clearTail(tail: Point): void{
         this.ctx.fillStyle = "white";
         this.ctx.fillRect(tail.getX() - 5, tail.getY() - 5, 10, 10);
+    }
+
+    drawCandy(candy: Candy): void{
+        this.drawPoint(candy.getPosition(), "red");
     }
 }
