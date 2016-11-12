@@ -1,23 +1,45 @@
+/// <reference path='Point.ts'/>
+
 class Snake{
-    private pos_x: number;
-    private pos_y: number;
-    private direction: number;
+    head: Point;
+    body: Array<Point> = [];
 
-    constructor(pos_x: number, pos_y: number){
-        this.pos_x = pos_x;
-        this.pos_y = pos_y;
+    constructor(){
     }
 
-    getX(): number{
-        return this.pos_x;
+    setHead(head: Point): void{
+        this.head = head;
     }
 
-    getY(): number{
-        return this.pos_y;
+    getHead(): Point{
+        return this.head;
+    }
+
+    getTail(): Point{
+        return this.body[this.body.length - 1];
+    }
+
+    getLength(): number{
+        return this.body.length + 1;
+    }
+
+    setBody(body: Array<Point>): void{
+        this.body = body;
+    }
+
+    getBody(): Array<Point>{
+        return this.body;
+    }
+
+    removeTail(): Point{
+        return this.body.pop();
+    }
+
+    grow(point: Point): void{
+        this.body.push(point);
     }
 
     print(): string{
         return "Hello Snake";
     }
 }
-

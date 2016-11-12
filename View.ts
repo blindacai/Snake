@@ -7,15 +7,26 @@ class View{
         this.ctx = this.canvas.getContext("2d");
     }
 
-    drawSnake(snake: Snake): void{
+    private drawPoint(point: Point): void{
         this.ctx.fillStyle = "#4b4312";
         this.ctx.beginPath();
-        this.ctx.arc(snake.getX(), snake.getY(), 5, 0, 2*Math.PI, false);
+        this.ctx.arc(point.getX(), point.getY(), 5, 0, 2*Math.PI, false);
         this.ctx.fill();
     }
 
-    clearSnake(snake: Snake): void{
+    drawSnake(snake: Snake): void{
+        this.drawHead(snake.getHead());
+        for(let point of snake.getBody()){
+            this.drawPoint(point);
+        }
+    }
+
+    drawHead(head: Point): void{
+        this.drawPoint(head);
+    }
+
+    clearSnake(tail: Point): void{
         this.ctx.fillStyle = "white";
-        this.ctx.fillRect(snake.getX() - 5, snake.getY() - 5, 10, 10);
+        this.ctx.fillRect(tail.getX() - 5, tail.getY() - 5, 10, 10);
     }
 }

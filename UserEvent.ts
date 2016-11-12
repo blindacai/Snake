@@ -12,7 +12,7 @@ class UserEvent{
         window.addEventListener("keydown", (event) => this.handleKeyDown(event), true);
     }
 
-    getLastDirection(){
+    getNewDirection(){
         return this.new_direction;
     }
 

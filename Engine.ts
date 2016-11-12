@@ -1,18 +1,21 @@
-/// <reference path='Snake.ts'/>
 /// <reference path='View.ts'/>
 /// <reference path='UserEvent.ts'/>
 /// <reference path='Frame.ts'/>
+/// <reference path='Snake.ts'/>
 
 class Engine{
-    snake: Snake;
     view: View;
     event: UserEvent;
     frame: Frame;
+    snake: Snake;
 
     gameState: number;
 
     constructor(){
-        this.snake = new Snake(100, 100);
+        this.snake = new Snake();
+        this.snake.setHead(new Point(130, 100));
+        this.snake.setBody([new Point(120, 100), new Point(110, 100), new Point(100, 100)]);
+
         this.view = new View();
         this.event = new UserEvent(this);
         this.frame = new Frame(this.view, this.snake, this.event);
@@ -22,10 +25,6 @@ class Engine{
 
     getFrame(): Frame{
         return this.frame;
-    }
-
-    getSnake(): Snake{
-        return this.snake
     }
 
     main(){
