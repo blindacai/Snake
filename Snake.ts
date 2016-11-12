@@ -5,8 +5,11 @@ class Snake{
     body: Array<Point> = [];
     direction: number;
 
-    constructor(dir: number){
-        this.direction = dir;
+    constructor(view: View){
+        this.direction = 0;
+        this.setHead(new Point(130, 100));
+        this.setBody([new Point(120, 100), new Point(110, 100), new Point(100, 100)]);
+        view.drawSnake(this);
     }
 
     setHead(head: Point): void{
