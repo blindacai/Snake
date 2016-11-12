@@ -3,8 +3,10 @@
 class Snake{
     head: Point;
     body: Array<Point> = [];
+    direction: number;
 
-    constructor(){
+    constructor(dir: number){
+        this.direction = dir;
     }
 
     setHead(head: Point): void{
@@ -29,6 +31,14 @@ class Snake{
 
     getBody(): Array<Point>{
         return this.body;
+    }
+
+    setDirection(dir: number): void{
+        this.direction = dir;
+    }
+
+    getDirection(): number{
+        return this.direction;
     }
 
     removeTail(): Point{

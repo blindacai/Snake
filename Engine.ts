@@ -12,7 +12,7 @@ class Engine{
     gameState: number;
 
     constructor(){
-        this.snake = new Snake();
+        this.snake = new Snake(0);
         this.snake.setHead(new Point(130, 100));
         this.snake.setBody([new Point(120, 100), new Point(110, 100), new Point(100, 100)]);
 
@@ -21,10 +21,6 @@ class Engine{
         this.frame = new Frame(this.view, this.snake, this.event);
 
         this.gameState = State.ready;
-    }
-
-    getFrame(): Frame{
-        return this.frame;
     }
 
     main(){

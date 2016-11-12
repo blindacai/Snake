@@ -1,33 +1,35 @@
 class Frame{
     view: View;
-    newSnake: Snake;
+    snake: Snake;
     user_event: UserEvent;
 
     constructor(view: View, snake:Snake, user_event: UserEvent){
         this.view = view;
-        this.newSnake = snake;
+        this.snake = snake;
         this.user_event = user_event;
     }
 
     nextFrame(){
         let dir = this.user_event.getNewDirection();
-        this.newSnake.getBody().unshift(this.newSnake.getHead());
+        (dir + this.snake.getDirection() == 0)? (dir = this.snake.getDirection()) : this.snake.setDirection(dir);
+
+        this.snake.getBody().unshift(this.snake.getHead());
 
         if(dir == Direction.RIGHT){
-            this.newSnake.setHead( new Point(this.newSnake.getHead().getX() + 10, this.newSnake.getHead().getY()) );
+            this.snake.setHead( new Point(this.snake.getHead().getX() + 10, this.snake.getHead().getY()) );
         }
         else if(dir == Direction.DOWN){
-            this.newSnake.setHead( new Point(this.newSnake.getHead().getX(), this.newSnake.getHead().getY() + 10) );
+            this.snake.setHead( new Point(this.snake.getHead().getX(), this.snake.getHead().getY() + 10) );
         }
         else if(dir == Direction.LEFT){
-            this.newSnake.setHead( new Point(this.newSnake.getHead().getX() - 10, this.newSnake.getHead().getY()) );
+            this.snake.setHead( new Point(this.snake.getHead().getX() - 10, this.snake.getHead().getY()) );
         }
         else if(dir == Direction.UP){
-            this.newSnake.setHead( new Point(this.newSnake.getHead().getX(), this.newSnake.getHead().getY() - 10) );
+            this.snake.setHead( new Point(this.snake.getHead().getX(), this.snake.getHead().getY() - 10) );
         }
         else return;
 
-        this.view.clearTail(this.newSnake.removeTail());
-        this.view.drawHead(this.newSnake.getHead());
+        this.view.clearTail(this.snake.removeTail());
+        this.view.drawHead(this.snake.getHead());
     }
 }

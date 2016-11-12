@@ -1,3 +1,7 @@
+class Utils{
+
+}
+
 const enum Direction{
     RIGHT = 1,
     LEFT = -1,
@@ -11,5 +15,5 @@ const enum State{
 }
 
 const enum Config{
-    
+
 }
