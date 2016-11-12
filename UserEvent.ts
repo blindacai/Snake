@@ -1,7 +1,7 @@
-
 class UserEvent{
     engine: Engine;
     listening: boolean;
+    new_direction: number;
 
     constructor(engine: Engine){
         this.engine = engine;
@@ -12,11 +12,27 @@ class UserEvent{
         window.addEventListener("keydown", (event) => this.handleKeyDown(event), true);
     }
 
+    getLastDirection(){
+        return this.new_direction;
+    }
+
     private handleKeyDown(event: KeyboardEvent): any{
-        if(this.listening){
-            this.engine.getFrame().nextFrame(new Snake(this.engine.getFrame().getoldSnake().getX(), 
-                                                       this.engine.getFrame().getoldSnake().getY() + 10));
-            engine.start();
+        engine.start(); 
+        this.newDirection(event);
+    }
+
+    private newDirection(event: KeyboardEvent): void{
+        if(event.keyCode == 39){
+            this.new_direction = Direction.RIGHT;
+        }
+        else if(event.keyCode == 40){
+            this.new_direction = Direction.DOWN;
+        }
+        else if(event.keyCode == 37){
+            this.new_direction = Direction.LEFT;
+        }
+        else if(event.keyCode == 38){
+            this.new_direction = Direction.UP;
         }
     }
 }

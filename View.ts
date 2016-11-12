@@ -3,7 +3,6 @@ class View{
     ctx;
 
     constructor(){
-        console.log("view");
         this.canvas = <HTMLCanvasElement>document.getElementById("snake_canvas");
         this.ctx = this.canvas.getContext("2d");
     }

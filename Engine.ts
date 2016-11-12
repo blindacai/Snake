@@ -9,13 +9,13 @@ class Engine{
     event: UserEvent;
     frame: Frame;
 
-    gameState;
+    gameState: number;
 
     constructor(){
         this.snake = new Snake(100, 100);
         this.view = new View();
-        this.frame = new Frame(this.view, this.snake);
         this.event = new UserEvent(this);
+        this.frame = new Frame(this.view, this.snake, this.event);
 
         this.gameState = State.ready;
     }
@@ -36,7 +36,7 @@ class Engine{
 
     start(){
         if(this.gameState == State.ready){
-            setInterval(this.frame.nextFrame.bind(this.frame), 1000);
+            setInterval(this.frame.nextFrame.bind(this.frame), 150);
             this.gameState = State.play;
         }
     }
