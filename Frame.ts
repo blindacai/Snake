@@ -13,36 +13,42 @@ class Frame{
 
     nextFrame(){
         let dir = this.user_event.getNewDirection();
-
-        console.log("snake: " + this.snake.getHead().getX() + " " + this.snake.getHead().getY());
-        console.log("candy: " + this.candy.getPosition().getX() + " " + this.candy.getPosition().getY());
-        console.log("direction: " + this.snake.getDirection());
+        let x_pos = this.snake.getHead().getX();
+        let y_pos = this.snake.getHead().getY();
 
         // prevent snake from moving in complete opposite direction
         (dir + this.snake.getDirection() == 0)? (dir = this.snake.getDirection()) : this.snake.setDirection(dir);
 
-        // prevent snake's body from growing when user hit non-arrow keys before starting the game
+        // prevent snake's body from growing when users hit non-arrow keys before starting the game
         if(dir != 0){
             this.snake.getBody().unshift(this.snake.getHead());
             this.initialGrowth();
         }
 
         if(dir == Direction.RIGHT){
-            this.snake.setHead( new Point(this.snake.getHead().getX() + 10, this.snake.getHead().getY()) );
+            this.snake.setHead( new Point( (Config.canvas_size - (x_pos + Config.snake_dia) < Config.snake_radius )?
+                                                5 : (x_pos + Config.snake_dia),
+                                            y_pos) );
         }
         else if(dir == Direction.DOWN){
-            this.snake.setHead( new Point(this.snake.getHead().getX(), this.snake.getHead().getY() + 10) );
+            this.snake.setHead( new Point( x_pos,
+                                (Config.canvas_size - (y_pos + Config.snake_dia) < Config.snake_radius )?
+                                    5 : (y_pos + Config.snake_dia) ) );
         }
         else if(dir == Direction.LEFT){
-            this.snake.setHead( new Point(this.snake.getHead().getX() - 10, this.snake.getHead().getY()) );
+            this.snake.setHead( new Point( (x_pos - Config.snake_dia < 5)?
+                                                Config.canvas_size - Config.snake_radius : (x_pos - Config.snake_dia),
+                                            y_pos ) );
         }
         else if(dir == Direction.UP){
-            this.snake.setHead( new Point(this.snake.getHead().getX(), this.snake.getHead().getY() - 10) );
+            this.snake.setHead( new Point( x_pos,
+                                           (y_pos - Config.snake_dia < 5)?
+                                                Config.canvas_size - Config.snake_radius : (y_pos - Config.snake_dia) ) );
         }
         else return;
 
         this.checkEatCandy();
-        this.view.drawHead(this.snake.getHead());
+        this.view.drawSnake(this.snake);
         this.view.clearPoint(this.snake.removeTail());
     }
 

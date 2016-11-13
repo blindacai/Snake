@@ -18,7 +18,7 @@ class Engine{
 
         this.snake = new Snake(this.view);
         this.event = new UserEvent(this);
-        this.candy = new Candy(new Point(50, 50), this.view);
+        this.candy = new Candy(new Point(55, 55), this.view);
         this.frame = new Frame(this.view, this.snake, this.event, this.candy);
 
         this.gameState = State.ready;

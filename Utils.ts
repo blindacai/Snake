@@ -9,15 +9,18 @@ class Utils{
 
     static randomPos(){
         let random = Math.floor( Math.random() * 200);
-        return this.roundTen(random);
+        return this.roundFive(random);
     }
 
-    static roundTen(random: number){
-        if(random < 10){
-            return 10;
+    static roundFive(random: number): number{
+        let checkone = random - random % 5;
+        let checktwo = checkone % 10;
+
+        if(checktwo != 0){
+            return checkone;
         }
         else{
-            return random - random % 10;
+            return random + (5 - random % 5);
         }
     }
 }
@@ -35,5 +38,7 @@ const enum State{
 }
 
 const enum Config{
-
+    canvas_size = 200,
+    snake_radius = 5,
+    snake_dia = snake_radius * 2
 }

@@ -9,7 +9,7 @@ class Snake{
     constructor(view: View){
         this.direction = 0;
         this.growthLeft = 2;
-        this.setHead(new Point(130, 100));
+        this.setHead(new Point(125, 105));
         view.drawSnake(this);
     }
 

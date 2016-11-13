@@ -15,11 +15,7 @@ class View{
     }
 
     drawSnake(snake: Snake): void{
-        this.drawHead(snake.getHead());
-    }
-
-    drawHead(head: Point): void{
-        this.drawPoint(head);
+        this.drawPoint(snake.getHead());
     }
 
     clearPoint(tail: Point): void{
