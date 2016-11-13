@@ -4,7 +4,32 @@ class Utils{
     }
 
     static pickCandyPos(snake: Snake): Point{
-        return new Point(this.randomPos(), this.randomPos());
+        let again = true;
+        let newpoint = new Point(this.randomPos(), this.randomPos());
+
+        while(again){
+            if(!this.overlap(newpoint, snake)){
+                again = false
+            }
+            else{
+                newpoint = new Point(this.randomPos(), this.randomPos());
+            }
+        }
+
+        return newpoint;
+    }
+
+    static overlap(point: Point, snake: Snake): boolean{
+        if(point.getX() == snake.getHead().getX() && point.getY() == snake.getHead().getY()){
+            return true;
+        }
+        for(let body_point of snake.getBody()){
+            if(point.getX() == body_point.getX() && point.getY() == body_point.getY()){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     static randomPos(){
