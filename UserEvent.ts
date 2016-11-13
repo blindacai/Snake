@@ -34,5 +34,8 @@ class UserEvent{
         else if(event.keyCode == 38){
             this.new_direction = Direction.UP;
         }
+        else{
+            this.new_direction = 0;
+        }
     }
 }

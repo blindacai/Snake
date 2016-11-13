@@ -16,11 +16,16 @@ class Frame{
 
         console.log("snake: " + this.snake.getHead().getX() + " " + this.snake.getHead().getY());
         console.log("candy: " + this.candy.getPosition().getX() + " " + this.candy.getPosition().getY());
+        console.log("direction: " + this.snake.getDirection());
 
         // prevent snake from moving in complete opposite direction
         (dir + this.snake.getDirection() == 0)? (dir = this.snake.getDirection()) : this.snake.setDirection(dir);
 
-        this.snake.getBody().unshift(this.snake.getHead());
+        // prevent snake's body from growing when user hit non-arrow keys before starting the game
+        if(dir != 0){
+            this.snake.getBody().unshift(this.snake.getHead());
+            this.initialGrowth();
+        }
 
         if(dir == Direction.RIGHT){
             this.snake.setHead( new Point(this.snake.getHead().getX() + 10, this.snake.getHead().getY()) );
@@ -36,19 +41,23 @@ class Frame{
         }
         else return;
 
-        this.view.clearPoint(this.snake.removeTail());
+        this.checkEatCandy();
         this.view.drawHead(this.snake.getHead());
-
-        this.checkEatCandy()
+        this.view.clearPoint(this.snake.removeTail());
     }
 
     checkEatCandy(){
         if(Utils.checkCollide(this.candy.getPosition(), this.snake.getHead())){
-            console.log("Snake in check: " + this.snake.getHead().getX() + " " + this.snake.getHead().getY());
-            console.log("Candy in check: " + this.candy.getPosition().getX() + " " + this.candy.getPosition().getY());
             this.candy.eatCandy(this.candy);
             this.snake.grow(this.snake.getTail());
             this.candy = new Candy(Utils.pickCandyPos(this.snake), this.view);
+        }
+    }
+
+    initialGrowth(){
+        if(this.snake.growthLeft > 0){
+            this.snake.grow(this.snake.getTail());
+            this.snake.growthLeft--;
         }
     }
 }

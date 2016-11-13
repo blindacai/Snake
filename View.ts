@@ -16,9 +16,6 @@ class View{
 
     drawSnake(snake: Snake): void{
         this.drawHead(snake.getHead());
-        for(let point of snake.getBody()){
-            this.drawPoint(point);
-        }
     }
 
     drawHead(head: Point): void{

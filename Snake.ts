@@ -4,11 +4,12 @@ class Snake{
     head: Point;
     body: Array<Point> = [];
     direction: number;
+    growthLeft: number;
 
     constructor(view: View){
         this.direction = 0;
+        this.growthLeft = 2;
         this.setHead(new Point(130, 100));
-        this.setBody([new Point(120, 100), new Point(110, 100), new Point(100, 100)]);
         view.drawSnake(this);
     }
 
@@ -26,10 +27,6 @@ class Snake{
 
     getLength(): number{
         return this.body.length + 1;
-    }
-
-    setBody(body: Array<Point>): void{
-        this.body = body;
     }
 
     getBody(): Array<Point>{
