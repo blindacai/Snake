@@ -12,6 +12,7 @@ class Engine{
     candy: Candy;
 
     gameState: number;
+    frameIntervalId: number;
 
     constructor(){
         this.view = new View();
@@ -19,9 +20,25 @@ class Engine{
         this.snake = new Snake(this.view);
         this.event = new UserEvent(this);
         this.candy = new Candy(new Point(55, 55), this.view);
-        this.frame = new Frame(this.view, this.snake, this.event, this.candy);
+        this.frame = new Frame(this);
 
         this.gameState = State.ready;
+    }
+
+    getView(){
+        return this.view;
+    }
+
+    getSnake(){
+        return this.snake;
+    }
+
+    getEvent(){
+        return this.event;
+    }
+
+    getCandy(){
+        return this.candy;
     }
 
     main(){
@@ -31,8 +48,28 @@ class Engine{
 
     start(){
         if(this.gameState == State.ready){
-            setInterval(this.frame.nextFrame.bind(this.frame), 200);
+            this.frameIntervalId = setInterval(this.frame.nextFrame.bind(this.frame), 200);
             this.gameState = State.play;
+        }
+    }
+
+    gameOver(snake: Snake){
+        clearInterval(this.frameIntervalId);
+        setTimeout(() => this.clearBody(), 500);
+        this.snake.setLive(false);
+    }
+
+    clearBody(): void{
+        if(this.snake.getBody().length == 0){
+            return;
+        }
+        else{
+            if(!Utils.singleCollide(this.snake.getTail(), this.snake.getBody()[0])){
+                this.view.clearPoint(this.snake.getBody().pop());
+            }
+            else{ this.snake.getBody().pop(); }
+
+            setTimeout(() => this.clearBody(), 500);
         }
     }
 }

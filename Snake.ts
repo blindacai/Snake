@@ -5,12 +5,15 @@ class Snake{
     body: Array<Point> = [];
     direction: number;
     growthLeft: number;
+    live: boolean;
 
     constructor(view: View){
         this.direction = 0;
         this.growthLeft = 2;
+        this.live = true
+
         this.setHead(new Point(125, 105));
-        view.drawSnake(this);
+        view.drawHead(this.head);
     }
 
     setHead(head: Point): void{
@@ -39,6 +42,14 @@ class Snake{
 
     getDirection(): number{
         return this.direction;
+    }
+
+    setLive(live: boolean){
+        this.live = live;
+    }
+
+    getLive(): boolean{
+        return this.live;
     }
 
     removeTail(): Point{

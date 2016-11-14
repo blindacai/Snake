@@ -1,6 +1,15 @@
 class Utils{
-    static checkCollide(first: Point, second: Point): boolean{
+    static singleCollide(first: Point, second: Point): boolean{
         return (first.getX() == second.getX()) && (first.getY() == second.getY());
+    }
+
+    static listCollide(point: Point, body: Array<Point>): boolean{
+        for(let each of body){
+            if(this.singleCollide(point, each)){
+                return true;
+            }
+        }
+        return false;
     }
 
     static pickCandyPos(snake: Snake): Point{
@@ -8,28 +17,18 @@ class Utils{
         let newpoint = new Point(this.randomPos(), this.randomPos());
 
         while(again){
-            if(!this.overlap(newpoint, snake)){
+            if(!this.candyOverlap(newpoint, snake)){
                 again = false
             }
             else{
                 newpoint = new Point(this.randomPos(), this.randomPos());
             }
         }
-
         return newpoint;
     }
 
-    static overlap(point: Point, snake: Snake): boolean{
-        if(point.getX() == snake.getHead().getX() && point.getY() == snake.getHead().getY()){
-            return true;
-        }
-        for(let body_point of snake.getBody()){
-            if(point.getX() == body_point.getX() && point.getY() == body_point.getY()){
-                return true;
-            }
-        }
-
-        return false;
+    static candyOverlap(point: Point, snake: Snake): boolean{
+        return this.singleCollide(point, snake.getHead()) && this.listCollide(point, snake.getBody());
     }
 
     static randomPos(){

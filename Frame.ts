@@ -3,12 +3,14 @@ class Frame{
     snake: Snake;
     user_event: UserEvent;
     candy: Candy;
+    engine: Engine;
 
-    constructor(view: View, snake:Snake, user_event: UserEvent, candy: Candy){
-        this.view = view;
-        this.snake = snake;
-        this.user_event = user_event;
-        this.candy = candy;
+    constructor(engine: Engine){
+        this.engine = engine;
+        this.view = engine.getView();
+        this.snake = engine.getSnake();
+        this.user_event = engine.getEvent();
+        this.candy = engine.getCandy();
     }
 
     nextFrame(){
@@ -47,13 +49,24 @@ class Frame{
         }
         else return;
 
-        this.checkEatCandy();
-        this.view.drawSnake(this.snake);
-        this.view.clearPoint(this.snake.removeTail());
+
+        this.killSelf();
+        this.view.drawHead(this.snake.getHead());
+
+        if(this.snake.getLive()){
+            this.checkEatCandy();
+            this.view.clearPoint(this.snake.removeTail());
+        }
+    }
+
+    killSelf(): void{
+        if(Utils.listCollide(this.snake.getHead(), this.snake.getBody())){
+            this.engine.gameOver(this.snake);
+        }
     }
 
     checkEatCandy(){
-        if(Utils.checkCollide(this.candy.getPosition(), this.snake.getHead())){
+        if(Utils.singleCollide(this.candy.getPosition(), this.snake.getHead())){
             this.candy.eatCandy(this.candy);
             this.snake.grow(this.snake.getTail());
             this.candy = new Candy(Utils.pickCandyPos(this.snake), this.view);

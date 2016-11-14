@@ -14,8 +14,8 @@ class View{
         this.ctx.fill();
     }
 
-    drawSnake(snake: Snake): void{
-        this.drawPoint(snake.getHead());
+    drawHead(head: Point): void{
+        this.drawPoint(head);
     }
 
     clearPoint(tail: Point): void{
