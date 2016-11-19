@@ -6,4 +6,4 @@ Control the snake using keyboard arrows. Snake can walk through the wall and wil
 
 More features to be added...
 
-[Demo](https://plnkr.co/edit/1SGabsIlqTDenCLD2ERm)
+[Demo](https://plnkr.co/edit/BFUKZh?p=info)
