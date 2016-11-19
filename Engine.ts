@@ -19,7 +19,7 @@ class Engine{
 
         this.snake = new Snake(this.view);
         this.event = new UserEvent(this);
-        this.candy = new Candy(new Point(55, 55), this.view);
+        this.candy = new Candy(new Point(105, 105), this.view);
         this.frame = new Frame(this);
 
         this.gameState = State.ready;
@@ -48,7 +48,7 @@ class Engine{
 
     start(){
         if(this.gameState == State.ready){
-            this.frameIntervalId = setInterval(this.frame.nextFrame.bind(this.frame), 200);
+            this.frameIntervalId = setInterval(this.frame.nextFrame.bind(this.frame), 120);
             this.gameState = State.play;
         }
     }
@@ -69,7 +69,7 @@ class Engine{
             }
             else{ this.snake.getBody().pop(); }
 
-            setTimeout(() => this.clearBody(), 500);
+            setTimeout(() => this.clearBody(), 150);
         }
     }
 }

@@ -18,7 +18,7 @@ class Utils{
 
         while(again){
             if(!this.candyOverlap(newpoint, snake)){
-                again = false
+                again = false;
             }
             else{
                 newpoint = new Point(this.randomPos(), this.randomPos());
@@ -28,11 +28,11 @@ class Utils{
     }
 
     static candyOverlap(point: Point, snake: Snake): boolean{
-        return this.singleCollide(point, snake.getHead()) && this.listCollide(point, snake.getBody());
+        return this.singleCollide(point, snake.getHead()) || this.listCollide(point, snake.getBody());
     }
 
     static randomPos(){
-        let random = Math.floor( Math.random() * 200);
+        let random = Math.floor( Math.random() * 250);
         return this.roundFive(random);
     }
 
@@ -62,7 +62,7 @@ const enum State{
 }
 
 const enum Config{
-    canvas_size = 200,
+    canvas_size = 250,
     snake_radius = 5,
     snake_dia = snake_radius * 2
 }

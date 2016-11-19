@@ -12,7 +12,7 @@ class Snake{
         this.growthLeft = 2;
         this.live = true
 
-        this.setHead(new Point(125, 105));
+        this.setHead(new Point(205, 155));
         view.drawHead(this.head);
     }
 
